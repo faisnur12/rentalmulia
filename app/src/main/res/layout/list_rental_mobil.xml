@@ -20,7 +20,7 @@
             android:id="@+id/imageMobil"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:contentDescription="Foto Mobil"
             android:background="@drawable/bg_placeholder" />
 

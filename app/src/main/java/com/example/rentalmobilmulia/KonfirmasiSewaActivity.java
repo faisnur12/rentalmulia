@@ -138,7 +138,13 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     if (response.body().getSuccess() == 1) {
                         Toast.makeText(KonfirmasiSewaActivity.this, "Sewa berhasil dikonfirmasi!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(KonfirmasiSewaActivity.this, MainActivity.class));
+
+                        String kodeBooking = response.body().getKodeBooking();
+
+                        Intent intent = new Intent(KonfirmasiSewaActivity.this, BuktiSewaActivity.class);
+                        intent.putExtra("kode_booking", kodeBooking);
+                        intent.putExtra("total_harga", totalHarga);
+                        startActivity(intent);
                         finish();
                     } else {
                         Toast.makeText(KonfirmasiSewaActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -147,6 +153,7 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
                     Toast.makeText(KonfirmasiSewaActivity.this, "Gagal menyimpan data sewa!", Toast.LENGTH_SHORT).show();
                 }
             }
+
 
             @Override
             public void onFailure(@NonNull Call<ResponseSewa> call, @NonNull Throwable t) {
