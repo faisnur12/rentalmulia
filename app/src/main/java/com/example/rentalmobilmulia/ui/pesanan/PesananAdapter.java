@@ -1,29 +1,34 @@
 package com.example.rentalmobilmulia.ui.pesanan;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
 import com.example.rentalmobilmulia.R;
 import com.example.rentalmobilmulia.model.PesananModel;
-import com.example.rentalmobilmulia.utils.RupiahFormatter;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHolder> {
 
     private Context context;
-    private List<PesananModel> pesananList;
+    private List<PesananModel> list;
+    private static final String BASE_URL_IMAGE = "http://10.0.2.2/API_Rental_Mulia/uploads/";
 
-    public PesananAdapter(Context context, List<PesananModel> pesananList) {
+    public PesananAdapter(Context context, List<PesananModel> list) {
         this.context = context;
-        this.pesananList = pesananList;
+        this.list = list;
     }
 
     @NonNull
@@ -35,22 +40,28 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        PesananModel pesanan = pesananList.get(position);
+        PesananModel item = list.get(position);
 
-        holder.tvNamaMobil.setText(pesanan.getNama_mobil());
-        holder.tvTanggal.setText(pesanan.getTanggal_mulai() + " s.d " + pesanan.getTanggal_selesai());
-        holder.tvStatus.setText(pesanan.getStatus());
-        holder.tvTotal.setText(RupiahFormatter.format(pesanan.getTotal_harga()));
+        holder.tvNamaMobil.setText(item.getNama_mobil());
+        holder.tvTanggal.setText(item.getTgl_mulai() + " s/d " + item.getTgl_selesai());
+        holder.tvStatus.setText(item.getStatus());
+        holder.tvTotal.setText(formatRupiah(item.getTotal()));
 
         Glide.with(context)
-                .load("http://10.0.2.2/API_Rental_Mulia/uploads/" + pesanan.getFoto_mobil())
+                .load(BASE_URL_IMAGE + item.getFoto_mobil())
                 .placeholder(R.drawable.sample_mobil)
                 .into(holder.imgMobil);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetailPesananActivity.class);
+            intent.putExtra("kode_booking", item.getKode_booking());
+            context.startActivity(intent);
+        });
     }
 
     @Override
     public int getItemCount() {
-        return pesananList.size();
+        return list.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -61,9 +72,14 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
             super(itemView);
             imgMobil = itemView.findViewById(R.id.imgMobil);
             tvNamaMobil = itemView.findViewById(R.id.tvNamaMobil);
-            tvTanggal = itemView.findViewById(R.id.tvTanggalSewa);
-            tvStatus = itemView.findViewById(R.id.tvStatusPesanan);
-            tvTotal = itemView.findViewById(R.id.tvTotalBayar);
+            tvTanggal = itemView.findViewById(R.id.tvTanggal);
+            tvStatus = itemView.findViewById(R.id.tvStatus);
+            tvTotal = itemView.findViewById(R.id.tvTotal);
         }
+    }
+
+    private String formatRupiah(double number) {
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("in", "ID"));
+        return formatter.format(number);
     }
 }

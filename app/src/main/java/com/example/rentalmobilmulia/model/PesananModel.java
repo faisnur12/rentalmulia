@@ -1,16 +1,49 @@
 package com.example.rentalmobilmulia.model;
 
 public class PesananModel {
-    private String id_sewa, nama_mobil, foto_mobil, tanggal_mulai, tanggal_selesai, status;
-    private double total_harga;
+    private String kode_booking;
+    private int id_mobil;
+    private String nama_mobil;
+    private String foto_mobil;
+    private String tgl_mulai;
+    private String tgl_selesai;
+    private int durasi;
+    private double total;
+    private String status;
 
-    public String getId_sewa() { return id_sewa; }
-    public String getNama_mobil() { return nama_mobil; }
-    public String getFoto_mobil() { return foto_mobil; }
-    public String getTanggal_mulai() { return tanggal_mulai; }
-    public String getTanggal_selesai() { return tanggal_selesai; }
-    public String getStatus() { return status; }
-    public double getTotal_harga() { return total_harga; }
+    public String getKode_booking() {
+        return kode_booking;
+    }
 
-    // Setter juga bisa ditambahkan jika diperlukan
+    public int getId_mobil() {
+        return id_mobil;
+    }
+
+    public String getNama_mobil() {
+        return nama_mobil;
+    }
+
+    public String getFoto_mobil() {
+        return foto_mobil;
+    }
+
+    public String getTgl_mulai() {
+        return tgl_mulai;
+    }
+
+    public String getTgl_selesai() {
+        return tgl_selesai;
+    }
+
+    public int getDurasi() {
+        return durasi;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }

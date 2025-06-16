@@ -5,6 +5,7 @@ import com.example.rentalmobilmulia.model.MobilDetailResponse;
 import com.example.rentalmobilmulia.model.MobilModel;
 import com.example.rentalmobilmulia.model.MobilResponse;
 import com.example.rentalmobilmulia.model.PesananModel;
+import com.example.rentalmobilmulia.model.ResponsePesanan;
 import com.example.rentalmobilmulia.model.ResponseSewa;
 import com.example.rentalmobilmulia.ui.beranda.BerandaMobil;
 
@@ -58,13 +59,14 @@ public interface ServerAPI {
 
     @Multipart
     @POST("upload_bukti.php")
-    Call<ResponseSewa> uploadBuktiBayar(
+    Call<ResponseSewa> uploadBuktiTransfer(
             @Part("kode_booking") RequestBody kodeBooking,
-            @Part MultipartBody.Part bukti
+            @Part MultipartBody.Part bukti_bayar
     );
 
 
-    // ================== AUTH ==================
+
+
 // ================== PROFILE ==================
     @FormUrlEncoded
     @POST("login_user.php")
@@ -115,10 +117,10 @@ public interface ServerAPI {
     );
 
 
-    @GET("get_pesanan.php")
-    Call<List<PesananModel>> getPesanan(
-            @Query("id_user") String idUser,
-            @Query("status") String status
-    );
+    // ================== PESANANA ==================
+
+    @GET("get_pesanan_user.php")
+    Call<ResponsePesanan> getPesananByEmail(@Query("email") String email);
+
 
 }
