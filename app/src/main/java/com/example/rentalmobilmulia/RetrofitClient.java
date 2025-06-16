@@ -31,4 +31,5 @@ public class RetrofitClient {
     public static ServerAPI getInstance() {
         return getClient().create(ServerAPI.class);
     }
+
 }
