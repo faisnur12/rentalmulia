@@ -146,34 +146,7 @@
 
         </LinearLayout>
 
-        <!-- Separator -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="16dp">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="@android:color/darker_gray" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="or continue with"
-                android:textColor="@android:color/darker_gray"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="@android:color/darker_gray" />
-        </LinearLayout>
 
         <!-- Social Login -->
         <LinearLayout
@@ -183,20 +156,7 @@
             android:gravity="center"
             android:layout_marginTop="16dp">
 
-            <ImageButton
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_google"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Login with Google" />
 
-            <ImageButton
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="24dp"
-                android:src="@drawable/ic_facebook"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Login with Facebook" />
         </LinearLayout>
 
         <!-- Sign Up -->
