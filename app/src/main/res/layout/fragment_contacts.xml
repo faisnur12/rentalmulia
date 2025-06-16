@@ -63,19 +63,7 @@
                 android:textColor="@color/black"/>
         </LinearLayout>
 
-        <!-- Telepon -->
-        <LinearLayout
-            android:id="@+id/phone_layout"
-            style="@style/ContactItemStyle">
-            <ImageView
-                android:src="@drawable/ic_baseline_phone_24"
-                style="@style/ContactIconStyle"/>
-            <TextView
-                android:id="@+id/phone_text"
-                style="@style/ContactTextStyle"
-                android:text="+62 819 3883 3355"
-                android:textColor="@color/black" />
-        </LinearLayout>
+
 
         <!-- WhatsApp -->
         <LinearLayout
@@ -87,7 +75,7 @@
             <TextView
                 android:id="@+id/wa_text"
                 style="@style/ContactTextStyle"
-                android:text="+62 819 3883 3355"
+                android:text="+62 878 3938 3057 "
                 android:textColor="@color/black"/>
         </LinearLayout>
 
@@ -101,23 +89,37 @@
             <TextView
                 android:id="@+id/ig_text"
                 style="@style/ContactTextStyle"
-                android:text="gajahmotorsemarang"
+                android:text="muliarentcartegal"
                 android:textColor="@color/black"/>
         </LinearLayout>
 
-        <!-- Lokasi -->
+        <!-- Lokasi dengan MapView -->
         <LinearLayout
             android:id="@+id/location_layout"
-            style="@style/ContactItemStyle">
-            <ImageView
-                android:src="@drawable/ic_baseline_location_on_24"
-                style="@style/ContactIconStyle"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@android:color/white"
+            android:elevation="2dp"
+            android:layout_marginTop="16dp">
+
             <TextView
                 android:id="@+id/location_text"
-                style="@style/ContactTextStyle"
-                android:text="Jl. Gajah Raya No.9a, Sambirejo, Kec. Gayamsari, Kota Semarang, Jawa Tengah 50166"
-                android:textColor="@color/black"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lokasi Kami"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp"/>
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
         </LinearLayout>
+
 
     </LinearLayout>
 </ScrollView>
