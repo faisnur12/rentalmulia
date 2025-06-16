@@ -1,0 +1,64 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvKodeBooking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kode Booking: CRX12345"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Status: Menunggu Pembayaran"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/tvTotalHarga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total: Rp 1.200.000"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Informasi rekening tujuan transfer -->
+        <TextView
+            android:id="@+id/tvRekening"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Silakan transfer ke:\nBank BRI\nNo. Rek: 1234-5678-9101-1121\nA.N. Rental Mobil Mulia"
+            android:textSize="16sp"
+            android:textColor="#FF0000"
+            android:padding="12dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="16dp" />
+
+        <ImageView
+            android:id="@+id/imgBukti"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sample_bukti"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/btnUploadBukti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload Bukti Transfer"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/red_primary"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</ScrollView>

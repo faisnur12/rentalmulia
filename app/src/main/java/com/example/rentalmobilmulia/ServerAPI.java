@@ -48,12 +48,13 @@ public interface ServerAPI {
     Call<ResponseSewa> postSewa(
             @Field("email") String email,
             @Field("id_mobil") int idMobil,
-            @Field("tanggal_mulai") String mulai,
-            @Field("tanggal_selesai") String selesai,
+            @Field("tanggal_mulai") String tglMulai,
+            @Field("tanggal_selesai") String tglSelesai,
             @Field("metode_pickup") String pickup,
             @Field("driver") String driver,
             @Field("total_harga") double total
     );
+
 
     @Multipart
     @POST("upload_bukti.php")

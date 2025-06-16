@@ -33,9 +33,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="YOUR_API_KEY_HERE" />
 
-        <!-- Activities -->
         <activity
             android:name=".ui.beranda.CategoryMobilActivity"
+            android:exported="false" /> <!-- Activities -->
+        <activity
+            android:name=".BuktiSewaActivity"
             android:exported="false" />
         <activity
             android:name=".ChangePasswordActivity"

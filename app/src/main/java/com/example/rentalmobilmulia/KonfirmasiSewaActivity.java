@@ -5,12 +5,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.*;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.rentalmobilmulia.model.ResponseSewa;
-import com.example.rentalmobilmulia.ui.pesanan.PesananFragment;
+
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -35,11 +35,15 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
     private double totalHarga;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_konfirmasi_sewa);
 
-        // Inisialisasi UI
+        initViews();
+        getIntentData();
+    }
+
+    private void initViews() {
         imgMobil = findViewById(R.id.imgMobil);
         tvNamaMobil = findViewById(R.id.tvNamaMobil);
         tvHargaSewa = findViewById(R.id.tvHargaSewa);
@@ -51,43 +55,44 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
         tvTotalHarga = findViewById(R.id.tvTotalHarga);
         tvLamaSewa = findViewById(R.id.tvLamaSewa);
         btnKonfirmasi = findViewById(R.id.btnKonfirmasi);
+    }
 
-        // Ambil data dari Intent
+    private void getIntentData() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            idMobil = extras.getInt("id_mobil");
-            String namaMobil = extras.getString("nama_mobil");
-            double hargaSewa = extras.getDouble("harga_sewa");
-            tanggalMulai = extras.getString("tanggal_mulai");
-            tanggalSelesai = extras.getString("tanggal_selesai");
-            metodePickup = extras.getString("metode_pickup");
-            driver = extras.getString("driver");
-            String fotoMobil = extras.getString("foto_mobil");
+            idMobil = extras.getInt("id_mobil", -1);
+            String namaMobil = extras.getString("nama_mobil", "Mobil");
+            double hargaSewa = extras.getDouble("harga_sewa", 0);
+            tanggalMulai = extras.getString("tanggal_mulai", "");
+            tanggalSelesai = extras.getString("tanggal_selesai", "");
+            metodePickup = extras.getString("metode_pickup", "Ambil Sendiri");
+            driver = extras.getString("driver", "Tidak");
+            String fotoMobil = extras.getString("foto_mobil", "");
 
+            // Validasi tanggal
+            int hariSewa = hitungHariSewa(tanggalMulai, tanggalSelesai);
+            if (hariSewa <= 0) {
+                Toast.makeText(this, "Tanggal sewa tidak valid!", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
+
+            // Hitung biaya
+            double biayaMobil = hargaSewa * hariSewa;
+            int biayaDriver = driver.equalsIgnoreCase("Ya") ? 450000 * hariSewa : 0;
+            totalHarga = biayaMobil + biayaDriver;
+
+            // Set tampilan
             tvNamaMobil.setText(namaMobil);
             tvHargaSewa.setText(formatRupiah(hargaSewa) + " / Hari");
             tvTanggalMulai.setText(tanggalMulai);
             tvTanggalSelesai.setText(tanggalSelesai);
             tvMetodePickup.setText(metodePickup);
-
-            int hariSewa = hitungHariSewa(tanggalMulai, tanggalSelesai);
-            if (hariSewa <= 0) {
-                Toast.makeText(this, "Tanggal selesai tidak valid!", Toast.LENGTH_SHORT).show();
-                finish();
-                return;
-            }
-
-            tvLamaSewa.setText(hariSewa + " Hari");
-
-            double biayaMobil = hargaSewa * hariSewa;
-            int biayaDriver = "Ya".equalsIgnoreCase(driver) ? 45+0000 * hariSewa : 0;
-            totalHarga = biayaMobil + biayaDriver;
-
             tvBiayaMobil.setText(formatRupiah(biayaMobil));
             tvBiayaDriver.setText(formatRupiah(biayaDriver));
             tvTotalHarga.setText(formatRupiah(totalHarga));
+            tvLamaSewa.setText(hariSewa + " Hari");
 
-            // Load gambar mobil
             Glide.with(this)
                     .load(BASE_URL_FOTO + fotoMobil)
                     .placeholder(R.drawable.sample_mobil)
@@ -95,16 +100,18 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
                     .into(imgMobil);
 
             btnKonfirmasi.setOnClickListener(v -> konfirmasiSewa());
+        } else {
+            Toast.makeText(this, "Data sewa tidak ditemukan!", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 
     private void konfirmasiSewa() {
-        // Ambil email dari SharedPreferences login
         SharedPreferences pref = getSharedPreferences("login_pref", MODE_PRIVATE);
         String email = pref.getString("email", "");
 
         if (email.isEmpty()) {
-            Toast.makeText(this, "Anda belum login!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Silakan login terlebih dahulu!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -127,7 +134,7 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<ResponseSewa>() {
             @Override
-            public void onResponse(Call<ResponseSewa> call, Response<ResponseSewa> response) {
+            public void onResponse(@NonNull Call<ResponseSewa> call, @NonNull Response<ResponseSewa> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     if (response.body().getSuccess() == 1) {
                         Toast.makeText(KonfirmasiSewaActivity.this, "Sewa berhasil dikonfirmasi!", Toast.LENGTH_SHORT).show();
@@ -137,13 +144,13 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
                         Toast.makeText(KonfirmasiSewaActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(KonfirmasiSewaActivity.this, "Gagal menyimpan sewa!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(KonfirmasiSewaActivity.this, "Gagal menyimpan data sewa!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseSewa> call, Throwable t) {
-                Toast.makeText(KonfirmasiSewaActivity.this, "Terjadi kesalahan: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            public void onFailure(@NonNull Call<ResponseSewa> call, @NonNull Throwable t) {
+                Toast.makeText(KonfirmasiSewaActivity.this, "Kesalahan jaringan: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -154,13 +161,12 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
             Date dateMulai = format.parse(mulai);
             Date dateSelesai = format.parse(selesai);
             long diff = dateSelesai.getTime() - dateMulai.getTime();
-            return (int) (diff / (1000 * 60 * 60 * 24)); // tanpa +1
+            return (int) (diff / (1000 * 60 * 60 * 24)); // +1 termasuk hari pertama
         } catch (Exception e) {
             e.printStackTrace();
         }
         return 0;
     }
-
 
     private String formatRupiah(double amount) {
         Locale localeID = new Locale("in", "ID");
