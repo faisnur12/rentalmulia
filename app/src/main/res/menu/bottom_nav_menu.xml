@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_beranda"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_beranda" />
+
+    <item
+        android:id="@+id/navigation_rentalmobil"
+        android:icon="@drawable/car"
+        android:title="@string/title_rentalmobil" />
+
+    <item
+        android:id="@+id/navigation_pesanan"
+        android:icon="@drawable/pesanan"
+        android:title="@string/title_pesanan" />
+
+    <item
+        android:id="@+id/navigation_profil"
+        android:icon="@drawable/user"
+        android:title="@string/title_profil" />
+
+</menu>

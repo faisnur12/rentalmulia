@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <!-- Gambar Mobil -->
+        <ImageView
+            android:id="@+id/imageMobil"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Foto Mobil"
+            android:background="@drawable/bg_placeholder" />
+
+        <!-- Nama Mobil -->
+        <TextView
+            android:id="@+id/tvNamaMobil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Toyota Avanza 2022"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <!-- Transmisi -->
+        <TextView
+            android:id="@+id/tvTransmisi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transmisi: Manual"
+            android:textColor="@color/gray_dark"
+            android:textSize="12sp"
+            android:layout_marginTop="2dp" />
+
+        <!-- Harga Sewa -->
+        <TextView
+            android:id="@+id/tvHargaSewa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Rp199.000 / hari"
+            android:textColor="@color/red_primary"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+
+        <!-- Status Ketersediaan -->
+        <TextView
+            android:id="@+id/tvStatusMobil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Tersedia"
+            android:textColor="@color/green"
+            android:textStyle="italic"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvTotalDisewa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disewa: 0x"
+            android:textColor="@color/gray_dark"
+            android:textSize="12sp" />
+
+
+        <!-- Tombol Aksi -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <!-- Tombol Sewa -->
+            <Button
+                android:id="@+id/btnSewa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sewa Sekarang"
+                android:backgroundTint="@color/red_primary"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:paddingHorizontal="12dp"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Tombol Detail -->
+            <ImageButton
+                android:id="@+id/btnDetailRental"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_info"
+                android:scaleType="fitCenter"
+                android:contentDescription="Lihat Detail"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,172 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:fillViewport="true"
+    android:background="@android:color/white"
+    tools:context=".ui.rentalmobil.RentCarFragment">
+
+
+<LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Gambar Mobil -->
+        <ImageView
+            android:id="@+id/imageMobil"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sample_mobil"
+            android:contentDescription="@string/gambar_mobil" />
+
+        <!-- Info Mobil -->
+        <TextView
+            android:id="@+id/tvNamaMobil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Toyota, Avanza Veloz"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp" />
+
+        <TextView
+            android:id="@+id/tvHargaSewa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp. 400.000 / Hari"
+            android:textSize="16sp"
+            android:textColor="@color/red_primary"
+            android:layout_marginTop="4dp" />
+
+        <!-- Info Tambahan -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/tvSeats"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_seat"
+                android:drawablePadding="4dp"
+                android:text="7 Seats"
+                android:gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/tvTahun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/calendar"
+                android:drawablePadding="4dp"
+                android:text="2022"
+                android:gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/tvBahanBakar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_fuel"
+                android:drawablePadding="4dp"
+                android:text="Bensin"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <!-- Tanggal Mulai -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tanggal Mulai"
+            android:layout_marginTop="16dp" />
+
+        <EditText
+            android:id="@+id/etTanggalMulai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pilih tanggal"
+            android:focusable="false"
+            android:clickable="true"
+            android:drawableEnd="@drawable/calendar"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <!-- Tanggal Selesai -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tanggal Selesai"
+            android:layout_marginTop="12dp" />
+
+        <EditText
+            android:id="@+id/etTanggalSelesai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pilih tanggal"
+            android:focusable="false"
+            android:clickable="true"
+            android:drawableEnd="@drawable/calendar"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <!-- Metode Pickup -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Metode Pickup"
+            android:layout_marginTop="12dp" />
+
+        <Spinner
+            android:id="@+id/spinnerMetodePickup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_input"
+            android:padding="8dp" />
+
+        <!-- Driver -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Driver"
+            android:layout_marginTop="12dp" />
+
+        <RadioGroup
+            android:id="@+id/rgDriver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
+
+            <RadioButton
+                android:id="@+id/rbDriverYa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ya" />
+
+            <RadioButton
+                android:id="@+id/rbDriverTidak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tidak"
+                android:layout_marginStart="16dp" />
+        </RadioGroup>
+
+        <!-- Tombol -->
+        <Button
+            android:id="@+id/btnCekKetersediaan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cek Ketersediaan"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/red_primary"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</ScrollView>

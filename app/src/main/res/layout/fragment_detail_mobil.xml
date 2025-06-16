@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/detailMobilFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imageDetailMobil"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_placeholder" />
+
+        <TextView
+            android:id="@+id/tvNamaMobilDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama Mobil"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="12dp" />
+
+        <!-- Info 3 kolom -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/tvTransmisiDetail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Transmisi: -"
+                android:textSize="14sp"
+                android:textColor="@color/gray_dark" />
+
+            <TextView
+                android:id="@+id/tvTahunDetail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tahun: -"
+                android:textSize="14sp"
+                android:textColor="@color/gray_dark" />
+
+            <TextView
+                android:id="@+id/tvKapasitasDetail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Kapasitas: -"
+                android:textSize="14sp"
+                android:textColor="@color/gray_dark" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvNopolDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No. Polisi: -"
+            android:textSize="14sp"
+            android:textColor="@color/gray_dark"
+            android:layout_marginTop="6dp" />
+
+        <TextView
+            android:id="@+id/tvWarnaDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Warna: -"
+            android:textSize="14sp"
+            android:textColor="@color/gray_dark" />
+
+
+        <TextView
+            android:id="@+id/tvStatusDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            android:textStyle="italic"
+            android:textColor="@color/green"
+            android:textSize="13sp"
+            android:layout_marginTop="6dp" />
+
+        <TextView
+            android:id="@+id/tvHargaSewaDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp 0 / hari"
+            android:textColor="@color/red_primary"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/tvDeskripsiDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi..."
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="12dp" />
+
+        <Button
+            android:id="@+id/btnSewaMobil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sewa Sekarang"
+            android:backgroundTint="@color/red_primary"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">rentalmobilmulia</string>
+    <string name="title_beranda">Beranda</string>
+    <string name="title_rentalmobil">Cari Mobil</string>
+    <string name="title_pesanan">Pesanan</string>
+    <string name="title_profil">Profil</string>
+
+    <string name="title_sewamobil">Sewamobil</string>
+
+
+    <string name="gambar_mobil">Gambar Mobil</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="metode_pickup_array">
+        <item>Ambil Sendiri</item>
+        <item>Antar ke Lokasi</item>
+    </string-array>
+
+
+</resources>

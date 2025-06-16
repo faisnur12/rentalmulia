@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutPesanan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <!-- Judul -->
+    <TextView
+        android:id="@+id/tvJudul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pesanan Saya"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="16dp" />
+
+    <!-- Tab Aktif dan Riwayat -->
+    <LinearLayout
+        android:id="@+id/tabContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingBottom="12dp">
+
+        <Button
+            android:id="@+id/btnAktif"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:text="AKTIF"
+            android:backgroundTint="#0A775F"
+            android:textColor="@android:color/white"
+            android:background="@drawable/tab_left_selected" />
+
+        <Button
+            android:id="@+id/btnRiwayat"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:text="RIWAYAT"
+            android:background="@drawable/tab_right_unselected"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <!-- Search bar -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_search"
+                app:tint="@color/light_gray" />
+
+            <EditText
+                android:id="@+id/etCariPesanan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cari pesanan saya"
+                android:background="@android:color/transparent"
+                android:paddingStart="10dp"
+                android:textColor="#000"
+                android:textColorHint="#888888"
+                android:inputType="text" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPesanan"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone" />
+
+    <!-- Layout kosong (jika belum ada pesanan) -->
+    <LinearLayout
+        android:id="@+id/layoutKosong"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_empty_box"
+        android:contentDescription="Icon Pesanan Kosong" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pesanan Anda Masih Kosong"
+            android:textSize="16sp"
+            android:textColor="#444444"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,105 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Gambar Mobil -->
+        <ImageView
+            android:id="@+id/imgMobil"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample_mobil" />
+
+        <!-- Nama dan Harga Mobil -->
+        <TextView
+            android:id="@+id/tvNamaMobil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Mobil"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp" />
+
+        <TextView
+            android:id="@+id/tvHargaSewa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp. 400.000 / Hari"
+            android:textColor="@color/red_primary"
+            android:textSize="16sp" />
+
+        <!-- Info Sewa -->
+        <TextView android:text="Tanggal Sewa" style="@style/LabelText"/>
+        <TextView
+            android:id="@+id/tvTanggalMulai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12 Juni 2025" />
+
+        <TextView android:text="Tanggal Kembali" style="@style/LabelText"/>
+        <TextView
+            android:id="@+id/tvTanggalSelesai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15 Juni 2025" />
+
+        <TextView android:text="Metode Pickup" style="@style/LabelText"/>
+        <TextView
+            android:id="@+id/tvMetodePickup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ambil di lokasi" />
+
+        <TextView android:text="Biaya Mobil" style="@style/LabelText"/>
+        <TextView
+            android:id="@+id/tvBiayaMobil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp. 0" />
+
+        <TextView android:text="Biaya Driver" style="@style/LabelText"/>
+        <TextView
+            android:id="@+id/tvBiayaDriver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp. 0" />
+
+
+        <!-- Total Harga -->
+        <TextView android:text="Total Harga" style="@style/LabelText"/>
+        <TextView
+            android:id="@+id/tvTotalHarga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp. 1.200.000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/red_primary" />
+
+        <TextView
+            android:id="@+id/tvLamaSewa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 Hari"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp" />
+
+
+        <!-- Tombol Konfirmasi -->
+        <Button
+            android:id="@+id/btnKonfirmasi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Konfirmasi Sewa"
+            android:backgroundTint="@color/red_primary"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+</ScrollView>

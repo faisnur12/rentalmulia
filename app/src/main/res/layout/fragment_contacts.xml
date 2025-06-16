@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="#FFFFFF"
+    tools:context=".ui.profil.ContactsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Tombol Back -->
+        <LinearLayout
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start|center_vertical"
+            android:paddingBottom="16dp"
+            android:clickable="true"
+            android:focusable="true">
+
+
+        </LinearLayout>
+
+        <!-- Logo -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="190dp"
+            android:layout_height="90dp"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/logo"
+            android:scaleType="fitCenter"
+            android:contentDescription="Logo"
+            android:padding="2dp"
+            app:shapeAppearanceOverlay="@style/RoundedImage" />
+
+        <!-- Judul -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hubungi Kami"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Email -->
+        <LinearLayout
+            android:id="@+id/email_layout"
+            style="@style/ContactItemStyle">
+            <ImageView
+                android:src="@drawable/ic_baseline_email_24"
+                style="@style/ContactIconStyle"/>
+            <TextView
+                android:id="@+id/email_text"
+                style="@style/ContactTextStyle"
+                android:text="maxlitestore@gmail.com"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+        <!-- Telepon -->
+        <LinearLayout
+            android:id="@+id/phone_layout"
+            style="@style/ContactItemStyle">
+            <ImageView
+                android:src="@drawable/ic_baseline_phone_24"
+                style="@style/ContactIconStyle"/>
+            <TextView
+                android:id="@+id/phone_text"
+                style="@style/ContactTextStyle"
+                android:text="+62 819 3883 3355"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <!-- WhatsApp -->
+        <LinearLayout
+            android:id="@+id/wa_layout"
+            style="@style/ContactItemStyle">
+            <ImageView
+                android:src="@drawable/ic_whatsapp"
+                style="@style/ContactIconStyle"/>
+            <TextView
+                android:id="@+id/wa_text"
+                style="@style/ContactTextStyle"
+                android:text="+62 819 3883 3355"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+        <!-- Instagram -->
+        <LinearLayout
+            android:id="@+id/ig_layout"
+            style="@style/ContactItemStyle">
+            <ImageView
+                android:src="@drawable/ic_instagram"
+                style="@style/ContactIconStyle"/>
+            <TextView
+                android:id="@+id/ig_text"
+                style="@style/ContactTextStyle"
+                android:text="gajahmotorsemarang"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+        <!-- Lokasi -->
+        <LinearLayout
+            android:id="@+id/location_layout"
+            style="@style/ContactItemStyle">
+            <ImageView
+                android:src="@drawable/ic_baseline_location_on_24"
+                style="@style/ContactIconStyle"/>
+            <TextView
+                android:id="@+id/location_text"
+                style="@style/ContactTextStyle"
+                android:text="Jl. Gajah Raya No.9a, Sambirejo, Kec. Gayamsari, Kota Semarang, Jawa Tengah 50166"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
