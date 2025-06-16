@@ -6,24 +6,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.rentalmobilmulia.R;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ContactsFragment extends Fragment {
-
-    private MapView mapView;
 
     public ContactsFragment() {}
 
@@ -32,44 +25,32 @@ public class ContactsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
 
-        // Tombol back
-        LinearLayout btnBack = view.findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(v -> {
-            if (getActivity() != null) {
-                getActivity().getSupportFragmentManager().popBackStack();
-            }
-        });
+
 
         // Email
-        LinearLayout emailLayout = view.findViewById(R.id.email_layout);
-        emailLayout.setOnClickListener(v -> openEmail());
+        view.findViewById(R.id.email_layout).setOnClickListener(v -> openEmail());
+
+//        // Telepon
+//        view.findViewById(R.id.phone_layout).setOnClickListener(v -> openPhone());
 
         // WhatsApp
-        LinearLayout waLayout = view.findViewById(R.id.wa_layout);
-        waLayout.setOnClickListener(v -> openWhatsApp());
+        view.findViewById(R.id.wa_layout).setOnClickListener(v -> openWhatsApp());
 
         // Instagram
-        LinearLayout igLayout = view.findViewById(R.id.ig_layout);
-        igLayout.setOnClickListener(v -> openInstagram());
+        view.findViewById(R.id.ig_layout).setOnClickListener(v -> openInstagram());
 
-        // Lokasi
-        mapView = view.findViewById(R.id.mapView);
-        if (mapView != null) {
-            mapView.onCreate(savedInstanceState);
-            mapView.onResume();
+        // WebView Map
+        WebView webViewMap = view.findViewById(R.id.webViewMap);
+        webViewMap.setWebViewClient(new WebViewClient());
 
-            try {
-                MapsInitializer.initialize(requireActivity().getApplicationContext());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        WebSettings settings = webViewMap.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
 
-            mapView.getMapAsync(googleMap -> {
-                LatLng lokasi = new LatLng(-6.86997, 109.12559); // Lokasi Tegal
-                googleMap.addMarker(new MarkerOptions().position(lokasi).title("Mulia Rent Car"));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lokasi, 15));
-            });
-        }
+        String mapHtml = "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1980.5418599405562!2d109.07718578967288!3d-6.880573601522665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fbbac7e8f0a27%3A0xd4e3007ec7348fbf!2sRental%20mobil%20MULIA!5e0!3m2!1sid!2sid!4v1736268062185!5m2!1sid!2sid\" width=\"100%\" height=\"100%\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>";
+        String html = "<html><body style='margin:0;padding:0;'>" + mapHtml + "</body></html>";
+
+        webViewMap.loadData(html, "text/html", "UTF-8");
 
         return view;
     }
@@ -80,8 +61,14 @@ public class ContactsFragment extends Fragment {
         startActivity(intent);
     }
 
+    private void openPhone() {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:+6281938833355"));
+        startActivity(intent);
+    }
+
     private void openWhatsApp() {
-        String phoneNumber = "6287839383057"; // nomor WA tanpa tanda +
+        String phoneNumber = "628838833355";
         String message = "Halo, saya tertarik dengan layanan rental mobil Anda";
 
         try {
@@ -102,32 +89,7 @@ public class ContactsFragment extends Fragment {
         if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
             startActivity(intent);
         } else {
-            startActivity(new Intent(Intent.ACTION_VIEW, uri)); // Fallback ke browser
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
         }
-    }
-
-    // Lifecycle MapView agar tidak crash
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mapView != null) mapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        if (mapView != null) mapView.onPause();
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        if (mapView != null) mapView.onDestroy();
-        super.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        if (mapView != null) mapView.onLowMemory();
     }
 }
