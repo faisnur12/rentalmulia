@@ -20,10 +20,13 @@
             android:id="@+id/img_profile"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:scaleType="centerCrop"
             android:src="@drawable/foto_profile"
+            android:contentDescription="Profile Image"
+            android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/CircleImageView"
-            android:contentDescription="Profile Image" />
+            android:elevation="4dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_circle_shadow" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_upload_photo"
@@ -41,10 +44,11 @@
     </FrameLayout>
 
 
-    <!-- Konten Scroll -->
+    <!-- Scrollable Content -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,11 +59,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:text="PROFILE"
+                android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="34sp"
-                android:textStyle="bold" />
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.1" />
 
             <!-- Email -->
             <TextView
@@ -68,96 +73,108 @@
                 android:layout_marginTop="20dp"
                 android:text="Email"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etProfile_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_input_field"
+                android:paddingHorizontal="16dp"
                 android:hint="email Anda"
                 android:textColorHint="@color/gray_dark"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/red_primary"
-                android:inputType="textPersonName" />
+                android:inputType="textEmailAddress" />
 
-
+            <!-- Nama -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
                 android:text="Nama"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etProfile_Nama"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_input_field"
+                android:paddingHorizontal="16dp"
                 android:hint="nama Anda"
                 android:textColorHint="@color/gray_dark"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/red_primary"
                 android:inputType="text" />
 
-
-
+            <!-- Telp -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No .Telp"
+                android:layout_marginTop="14dp"
+                android:text="No. Telp"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etProfile_telp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_input_field"
+                android:paddingHorizontal="16dp"
                 android:hint="nomor telepon Anda"
                 android:textColorHint="@color/gray_dark"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/red_primary"
-                android:inputType="text" />
-            <!-- Address -->
+                android:inputType="phone" />
+
+            <!-- Alamat -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
                 android:text="Alamat"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etProfile_alamat"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
+                android:background="@drawable/bg_input_field"
+                android:padding="16dp"
+                android:gravity="top"
                 android:hint="alamat Anda"
                 android:textColorHint="@color/gray_dark"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/red_primary"
-                android:inputType="text" />
+                android:inputType="textMultiLine" />
 
-
-
-            <!-- Buttons -->
+            <!-- Tombol Submit -->
             <Button
                 android:id="@+id/tvProfileSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:text="Submit"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                android:textStyle="bold"
+             />
 
+            <!-- Tombol Back -->
             <Button
                 android:id="@+id/btnBack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:text="Back"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/red_primary"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/red_primary" />
 
         </LinearLayout>
     </ScrollView>
