@@ -3,6 +3,7 @@
     <color name="red_primary">#F44336</color>
     <color name="red_dark">#D32F2F</color>
     <color name="red_light">#FFCDD2</color>
+    <color name="blue_light">#F0F7FF</color>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
