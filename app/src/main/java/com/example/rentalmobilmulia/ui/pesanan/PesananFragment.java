@@ -1,18 +1,20 @@
 package com.example.rentalmobilmulia.ui.pesanan;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rentalmobilmulia.R;
-
 import com.example.rentalmobilmulia.RetrofitClient;
 import com.example.rentalmobilmulia.ServerAPI;
 import com.example.rentalmobilmulia.model.PesananModel;
@@ -52,11 +54,18 @@ public class PesananFragment extends Fragment {
         SharedPreferences pref = getActivity().getSharedPreferences("login_pref", getContext().MODE_PRIVATE);
         email = pref.getString("email", "");
 
-        loadPesanan();
+        // Listener tombol tab
+        btnAktif.setOnClickListener(v -> {
+            tampilkanPesanan("aktif");
+            updateTabTampilan(true);
+        });
 
-        btnAktif.setOnClickListener(v -> tampilkanPesanan("aktif"));
-        btnRiwayat.setOnClickListener(v -> tampilkanPesanan("riwayat"));
+        btnRiwayat.setOnClickListener(v -> {
+            tampilkanPesanan("riwayat");
+            updateTabTampilan(false);
+        });
 
+        // Pencarian pesanan
         etCari.addTextChangedListener(new android.text.TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -69,6 +78,9 @@ public class PesananFragment extends Fragment {
             @Override
             public void afterTextChanged(android.text.Editable s) {}
         });
+
+        loadPesanan();
+        updateTabTampilan(true); // Default tab: AKTIF
 
         return view;
     }
@@ -100,10 +112,15 @@ public class PesananFragment extends Fragment {
 
     private void tampilkanPesanan(String tipe) {
         List<PesananModel> filterList = new ArrayList<>();
+
         for (PesananModel p : semuaPesanan) {
-            if (tipe.equals("aktif") && (p.getStatus().equalsIgnoreCase("Menunggu Pembayaran") || p.getStatus().equalsIgnoreCase("Sudah Dibayar"))) {
+            if (tipe.equals("aktif") &&
+                    (p.getStatus().equalsIgnoreCase("Menunggu Pembayaran") ||
+                            p.getStatus().equalsIgnoreCase("Sudah Dibayar"))) {
                 filterList.add(p);
-            } else if (tipe.equals("riwayat") && (p.getStatus().equalsIgnoreCase("Selesai") || p.getStatus().equalsIgnoreCase("Dibatalkan"))) {
+            } else if (tipe.equals("riwayat") &&
+                    (p.getStatus().equalsIgnoreCase("Selesai") ||
+                            p.getStatus().equalsIgnoreCase("Dibatalkan"))) {
                 filterList.add(p);
             }
         }
@@ -122,7 +139,8 @@ public class PesananFragment extends Fragment {
     private void filterPesanan(String keyword) {
         List<PesananModel> hasilFilter = new ArrayList<>();
         for (PesananModel p : semuaPesanan) {
-            if (p.getNama_mobil().toLowerCase().contains(keyword.toLowerCase()) || p.getKode_booking().toLowerCase().contains(keyword.toLowerCase())) {
+            if (p.getNama_mobil().toLowerCase().contains(keyword.toLowerCase()) ||
+                    p.getKode_booking().toLowerCase().contains(keyword.toLowerCase())) {
                 hasilFilter.add(p);
             }
         }
@@ -132,4 +150,28 @@ public class PesananFragment extends Fragment {
             rvPesanan.setAdapter(adapter);
         }
     }
+
+    private void updateTabTampilan(boolean isAktifTab) {
+        if (getContext() == null) return;
+
+        if (isAktifTab) {
+            // AKTIF nyala (merah)
+            btnAktif.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.red_primary));
+            btnAktif.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+
+            // RIWAYAT mati (putih)
+            btnRiwayat.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), android.R.color.white));
+            btnRiwayat.setTextColor(ContextCompat.getColor(getContext(), R.color.red_primary));
+        } else {
+            // AKTIF mati (putih)
+            btnAktif.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), android.R.color.white));
+            btnAktif.setTextColor(ContextCompat.getColor(getContext(), R.color.red_primary));
+
+            // RIWAYAT nyala (merah)
+            btnRiwayat.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.red_primary));
+            btnRiwayat.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+        }
+    }
+
+
 }

@@ -5,6 +5,7 @@ import com.example.rentalmobilmulia.model.MobilDetailResponse;
 import com.example.rentalmobilmulia.model.MobilModel;
 import com.example.rentalmobilmulia.model.MobilResponse;
 import com.example.rentalmobilmulia.model.PesananModel;
+import com.example.rentalmobilmulia.model.ResponseDefault;
 import com.example.rentalmobilmulia.model.ResponsePesanan;
 import com.example.rentalmobilmulia.model.ResponseSewa;
 import com.example.rentalmobilmulia.ui.beranda.BerandaMobil;
@@ -49,12 +50,13 @@ public interface ServerAPI {
     Call<ResponseSewa> postSewa(
             @Field("email") String email,
             @Field("id_mobil") int idMobil,
-            @Field("tanggal_mulai") String tglMulai,
-            @Field("tanggal_selesai") String tglSelesai,
-            @Field("metode_pickup") String pickup,
+            @Field("tanggal_mulai") String tanggalMulai,
+            @Field("tanggal_selesai") String tanggalSelesai,
+            @Field("metode_pickup") String metodePickup,
             @Field("driver") String driver,
-            @Field("total_harga") double total
+            @Field("total_harga") double totalHarga
     );
+
 
 
     @Multipart
@@ -64,6 +66,11 @@ public interface ServerAPI {
             @Part MultipartBody.Part bukti_bayar
     );
 
+    @FormUrlEncoded
+    @POST("batal_sewa.php")
+    Call<ResponseDefault> batalkanSewa(
+            @Field("kode_booking") String kodeBooking
+    );
 
 
 

@@ -15,9 +15,9 @@
 
         <ImageView
             android:id="@+id/imgMobil"
-            android:layout_width="100dp"
-            android:layout_height="70dp"
-            android:scaleType="centerCrop"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/sample_mobil"
             android:background="@drawable/bg_image_border" />
 
@@ -64,7 +64,18 @@
                 android:textStyle="bold"
                 android:textColor="#D32F2F"
                 android:layout_marginTop="4dp" />
-        </LinearLayout>
 
+            <Button
+                android:id="@+id/btnBatalkan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Batalkan Sewa"
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/red_primary"
+                android:visibility="gone"
+                android:textSize="12sp" />
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

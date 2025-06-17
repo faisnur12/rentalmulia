@@ -3,6 +3,7 @@ package com.example.rentalmobilmulia;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.*;
 
 import androidx.annotation.NonNull;
@@ -10,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.rentalmobilmulia.model.ResponseSewa;
-
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -69,7 +69,6 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
             driver = extras.getString("driver", "Tidak");
             String fotoMobil = extras.getString("foto_mobil", "");
 
-            // Validasi tanggal
             int hariSewa = hitungHariSewa(tanggalMulai, tanggalSelesai);
             if (hariSewa <= 0) {
                 Toast.makeText(this, "Tanggal sewa tidak valid!", Toast.LENGTH_SHORT).show();
@@ -77,12 +76,10 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
                 return;
             }
 
-            // Hitung biaya
             double biayaMobil = hargaSewa * hariSewa;
             int biayaDriver = driver.equalsIgnoreCase("Ya") ? 450000 * hariSewa : 0;
             totalHarga = biayaMobil + biayaDriver;
 
-            // Set tampilan
             tvNamaMobil.setText(namaMobil);
             tvHargaSewa.setText(formatRupiah(hargaSewa) + " / Hari");
             tvTanggalMulai.setText(tanggalMulai);
@@ -114,6 +111,14 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
             Toast.makeText(this, "Silakan login terlebih dahulu!", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        Log.d("DEBUG_SEWA", "email: " + email);
+        Log.d("DEBUG_SEWA", "idMobil: " + idMobil);
+        Log.d("DEBUG_SEWA", "tanggalMulai: " + tanggalMulai);
+        Log.d("DEBUG_SEWA", "tanggalSelesai: " + tanggalSelesai);
+        Log.d("DEBUG_SEWA", "metodePickup: " + metodePickup);
+        Log.d("DEBUG_SEWA", "driver: " + driver);
+        Log.d("DEBUG_SEWA", "totalHarga: " + totalHarga);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -154,7 +159,6 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
                 }
             }
 
-
             @Override
             public void onFailure(@NonNull Call<ResponseSewa> call, @NonNull Throwable t) {
                 Toast.makeText(KonfirmasiSewaActivity.this, "Kesalahan jaringan: " + t.getMessage(), Toast.LENGTH_LONG).show();
@@ -168,7 +172,7 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
             Date dateMulai = format.parse(mulai);
             Date dateSelesai = format.parse(selesai);
             long diff = dateSelesai.getTime() - dateMulai.getTime();
-            return (int) (diff / (1000 * 60 * 60 * 24)); // +1 termasuk hari pertama
+            return (int) (diff / (1000 * 60 * 60 * 24));
         } catch (Exception e) {
             e.printStackTrace();
         }
