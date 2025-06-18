@@ -23,7 +23,7 @@
             android:layout_height="180dp"
             android:scaleType="fitCenter"
             android:contentDescription="Foto Mobil"
-            android:background="@drawable/bg_placeholder"
+
             android:clipToOutline="true"
             android:foreground="?android:attr/selectableItemBackground" />
 
@@ -100,7 +100,7 @@
                 android:textSize="13sp"
                 android:paddingHorizontal="16dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/bg_button_red_rounded" />
+                />
 
             <!-- Tombol Detail -->
             <ImageButton

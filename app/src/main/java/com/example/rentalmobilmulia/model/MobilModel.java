@@ -1,7 +1,6 @@
 package com.example.rentalmobilmulia.model;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 
 public class MobilModel implements Serializable {
@@ -243,5 +242,43 @@ public class MobilModel implements Serializable {
 
     public void setMerk(String merk) {
         this.merk = merk;
+    }
+
+    // ===================== CONSTRUCTOR TAMBAHAN =====================
+    public MobilModel(int id_mobil, String nama_mobil, String transmisi, String merk, String tahun,
+                      String seating, String bb, String status, String harga,
+                      String deskripsi, String image1, int total_disewa) {
+
+        this.id_mobil = id_mobil;
+        this.nama_mobil = nama_mobil;
+        this.transmisi = transmisi;
+        this.merk = merk;
+        this.tahun = tahun;
+        this.seating = seating;
+        this.bb = bb;
+        this.status = status;
+        this.harga = harga;
+        this.deskripsi = deskripsi;
+        this.image1 = image1;
+        this.total_disewa = total_disewa;
+    }
+
+    // Optional constructor with harga_sewa as double
+    public MobilModel(int id_mobil, String nama_mobil, String transmisi, String merk, String tahun,
+                      String seating, String bb, String status, double harga_sewa,
+                      String deskripsi, String image1, int total_disewa) {
+
+        this.id_mobil = id_mobil;
+        this.nama_mobil = nama_mobil;
+        this.transmisi = transmisi;
+        this.merk = merk;
+        this.tahun = tahun;
+        this.seating = seating;
+        this.bb = bb;
+        this.status = status;
+        this.harga = String.valueOf(harga_sewa);
+        this.deskripsi = deskripsi;
+        this.image1 = image1;
+        this.total_disewa = total_disewa;
     }
 }

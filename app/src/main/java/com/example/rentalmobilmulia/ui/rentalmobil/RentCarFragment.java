@@ -52,8 +52,8 @@ public class RentCarFragment extends Fragment {
                 new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false)
         );
 
-        setupAdapter(); // pastikan adapter diset dulu
-        loadMobil();    // lalu ambil data
+        setupAdapter();
+        loadMobil();
 
         return view;
     }
@@ -102,15 +102,17 @@ public class RentCarFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<MobilResponse> call, @NonNull Response<MobilResponse> response) {
                 if (response.body() != null) {
-                    Log.e("DEBUG_JSON", new com.google.gson.Gson().toJson(response.body()));
+                    Log.d("RESPON_MOBIL", new com.google.gson.Gson().toJson(response.body()));
                 }
 
                 if (response.isSuccessful() && response.body() != null && response.body().getMobil() != null) {
                     fullMobilList.clear();
                     fullMobilList.addAll(response.body().getMobil());
 
+                    Log.d("DATA_MOBIL_SIZE", "Jumlah data: " + fullMobilList.size());
+
                     setupKategori(fullMobilList);
-                    filterMobil(); // update filteredList dan tampilkan
+                    filterMobil();
                 } else {
                     Toast.makeText(getContext(), "Gagal memuat data mobil", Toast.LENGTH_SHORT).show();
                 }
