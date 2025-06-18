@@ -1,147 +1,199 @@
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/homeContainer"
+    android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".ui.beranda.BerandaFragment">
+    tools:ignore="MissingClass">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/homeContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".ui.beranda.BerandaFragment">
 
-        <!-- Header -->
         <LinearLayout
-            android:id="@+id/headerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/img_profile"
-                android:layout_width="54dp"
-                android:layout_height="54dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/foto_profile"
-                app:shapeAppearanceOverlay="@style/CircleImageView"
-                android:contentDescription="Profile Image"
-                android:backgroundTint="@color/white"
-                android:elevation="2dp" />
-
+            <!-- Header -->
             <LinearLayout
-                android:layout_width="0dp"
+                android:id="@+id/headerLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="12dp">
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp">
 
-                <TextView
-                    android:id="@+id/tvUsername"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/img_profile"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/foto_profile"
+                    app:shapeAppearanceOverlay="@style/CircleImageView"
+                    android:contentDescription="Profile Image"
+                    android:backgroundTint="@color/white"
+                    android:elevation="2dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:id="@+id/tvUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Guest!"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Selamat datang kembali!"
+                        android:textSize="13sp"
+                        android:textColor="@color/gray_dark" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Guest!"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Selamat datang kembali!"
-                    android:textSize="13sp"
-                    android:textColor="@color/gray_dark" />
+                    <ImageView
+                        android:id="@+id/btnNotif"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_notifications"
+                        android:layout_marginEnd="12dp"
+                        android:contentDescription="Notifikasi"
+                        android:background="?attr/selectableItemBackgroundBorderless" />
+
+                    <ImageView
+                        android:id="@+id/btnLiveChat"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_chat"
+                        android:contentDescription="Live Chat"
+                        android:background="?attr/selectableItemBackgroundBorderless" />
+                </LinearLayout>
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/btnNotif"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:src="@drawable/ic_notifications"
-                android:background="?attr/selectableItemBackgroundBorderless" />
+            <!-- Search -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardSearch"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="2dp">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:queryHint="Cari produk..."
+                    android:iconifiedByDefault="false" />
+            </androidx.cardview.widget.CardView>
+
+
+            <!-- Slider Promo -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardSlider"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <com.denzcoskun.imageslider.ImageSlider
+                    android:id="@+id/imageSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:iss_auto_cycle="true"
+                    app:iss_period="3000"
+                    app:iss_delay="1000"
+                    app:iss_corner_radius="12"
+                    app:iss_title_background="@color/white" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Kategori Mobil -->
+            <TextView
+                android:id="@+id/tvCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kategori Mobil"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCategory"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                tools:listitem="@layout/item_category_home" />
+
+
+
+            <!-- Rekomendasi Mobil -->
+            <TextView
+                android:id="@+id/tvRekomendasiProduk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rekomendasi Mobil"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp" />
+
+            <!-- Tombol Lihat Semua -->
+            <TextView
+                android:id="@+id/btnLihatSemuaMobil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lihat semua"
+                android:textColor="@color/red_primary"
+                android:textSize="14sp"
+                android:layout_marginEnd="16dp"
+                android:layout_gravity="end"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="4dp"
+                android:textStyle="bold" />
+
+            <!-- Loading -->
+            <ProgressBar
+                android:id="@+id/progressLoadingMobil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:visibility="gone" />
+
+            <!-- List Mobil -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRekomendasiProduk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="72dp"
+                android:layout_marginHorizontal="16dp"
+                tools:listitem="@layout/list_rental_mobil" />
+
         </LinearLayout>
-
-        <!-- Search -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardSearch"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="12dp"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="2dp">
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:queryHint="Cari produk..."
-                android:iconifiedByDefault="false" />
-        </androidx.cardview.widget.CardView>
-
-        <!-- Slider Promo -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardSlider"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp">
-
-            <com.denzcoskun.imageslider.ImageSlider
-                android:id="@+id/imageSlider"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:iss_auto_cycle="true"
-                app:iss_period="3000"
-                app:iss_delay="1000"
-                app:iss_corner_radius="12"
-                app:iss_title_background="@color/white" />
-        </androidx.cardview.widget.CardView>
-
-        <!-- Kategori Mobil -->
-        <TextView
-            android:id="@+id/tvCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Kategori Mobil"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="8dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCategory"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginHorizontal="16dp"
-            tools:listitem="@layout/item_category_home" />
-
-        <!-- Rekomendasi Mobil -->
-        <TextView
-            android:id="@+id/tvRekomendasiProduk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Rekomendasi Mobil"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvRekomendasiProduk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="72dp"
-            android:layout_marginHorizontal="16dp"
-            tools:listitem="@layout/list_rental_mobil" />
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
