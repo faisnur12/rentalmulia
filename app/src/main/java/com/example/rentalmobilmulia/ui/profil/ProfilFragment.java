@@ -37,7 +37,7 @@ public class ProfilFragment extends Fragment {
 
     private TextView tvWelcomeLabel, tvUsername;
     private ImageView imgProfile;
-    private LinearLayout btnEditProfile, btnKontakKami, btnLogout;
+    private LinearLayout btnEditProfile,btnRiwayatSewa, btnKontakKami, btnLogout;
     private SharedPreferences sharedPreferences;
 
     public ProfilFragment() {}
@@ -77,6 +77,12 @@ public class ProfilFragment extends Fragment {
 
         btnEditProfile.setOnClickListener(v ->
                 Navigation.findNavController(view).navigate(R.id.action_navigation_profile_to_editProfileFragment));
+
+        btnRiwayatSewa = view.findViewById(R.id.btnRiwayatSewa);
+
+        btnRiwayatSewa.setOnClickListener(v ->
+                Navigation.findNavController(view).navigate(R.id.action_navigation_profile_to_riwayatSewaFragment));
+
 
         btnKontakKami.setOnClickListener(v ->
                 Navigation.findNavController(view).navigate(R.id.action_navigation_profile_to_contactFragment));

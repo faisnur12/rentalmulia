@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -41,18 +42,11 @@ public class MobilAdapter extends RecyclerView.Adapter<MobilAdapter.ViewHolder> 
         MobilModel mobil = list.get(position);
 
         holder.tvNama.setText(mobil.getNama_mobil());
-
-        String transmisi = mobil.getTransmisi() != null ? mobil.getTransmisi() : "-";
-        holder.tvTransmisi.setText("Transmisi: " + transmisi);
-
-        // Harga sewa aman dari null/invalid
-        double harga = mobil.getHarga_sewa();
-        holder.tvHarga.setText("Rp" + String.format("%,.0f", harga) + " / hari");
-
-        holder.tvStatus.setText(mobil.getStatus() != null ? mobil.getStatus() : "-");
+        holder.tvTransmisi.setText("Transmisi: " + (mobil.getTransmisi() != null ? mobil.getTransmisi() : "-"));
+        holder.tvHarga.setText("Rp" + String.format("%,.0f", mobil.getHarga_sewa()) + " / hari");
         holder.tvTotalDisewa.setText("Disewa: " + mobil.getTotal_disewa() + "x");
 
-        // Gambar aman dari null & spasi
+        // Gambar
         try {
             String imageName = mobil.getImage1() != null ? mobil.getImage1() : "";
             String encodedFilename = URLEncoder.encode(imageName, "UTF-8").replace("+", "%20");
@@ -67,26 +61,34 @@ public class MobilAdapter extends RecyclerView.Adapter<MobilAdapter.ViewHolder> 
             e.printStackTrace();
         }
 
-        // Aksi tombol
+        // Status dan warna
+        String status = mobil.getStatus() != null ? mobil.getStatus().trim() : "-";
+        holder.tvStatus.setText(status);
+
+        int statusColor;
+        if (status.equalsIgnoreCase("tersedia")) {
+            statusColor = ContextCompat.getColor(context, R.color.green);
+        } else if (status.equalsIgnoreCase("disewa")) {
+            statusColor = ContextCompat.getColor(context, R.color.red_primary);
+        } else {
+            statusColor = ContextCompat.getColor(context, R.color.gray_dark);
+        }
+        holder.tvStatus.setTextColor(statusColor);
+
+        // Tombol sewa
+        boolean isAvailable = "tersedia".equalsIgnoreCase(status);
+        // Biarkan tombol selalu aktif
+        holder.btnSewa.setEnabled(true);
+        holder.btnSewa.setAlpha(1f);
+
+
         holder.btnDetail.setOnClickListener(v -> {
-            if (callback != null) {
-                callback.onClickDetail(mobil);
-            }
+            if (callback != null) callback.onClickDetail(mobil);
         });
 
         holder.btnSewa.setOnClickListener(v -> {
-            if (callback != null) {
-                callback.onClickSewa(mobil);
-            }
+            if (callback != null) callback.onClickSewa(mobil);
         });
-
-        if (!"tersedia".equalsIgnoreCase(mobil.getStatus())) {
-            holder.btnSewa.setEnabled(false);
-            holder.btnSewa.setAlpha(0.5f);
-        } else {
-            holder.btnSewa.setEnabled(true);
-            holder.btnSewa.setAlpha(1f);
-        }
     }
 
     @Override

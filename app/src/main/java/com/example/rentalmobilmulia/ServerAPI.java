@@ -8,6 +8,7 @@ import com.example.rentalmobilmulia.model.PesananModel;
 import com.example.rentalmobilmulia.model.ResponseDefault;
 import com.example.rentalmobilmulia.model.ResponsePesanan;
 import com.example.rentalmobilmulia.model.ResponseSewa;
+import com.example.rentalmobilmulia.model.SewaResponse;
 import com.example.rentalmobilmulia.ui.beranda.BerandaMobil;
 
 import java.util.List;
@@ -30,12 +31,18 @@ public interface ServerAPI {
     @GET("getRekomendasiMobil.php")
     Call<List<MobilModel>> getRekomendasiMobil();
 
+
     @GET("get_mobil.php")
     Call<MobilResponse> getListMobil();
 
 
     @GET("get_detail_mobil.php")
     Call<MobilDetailResponse> getDetailMobil(@Query("id_mobil") int id);
+
+    @GET("update_status_mobil.php")
+    Call<ResponseDefault> updateStatusMobil();
+
+
 
     // ================== SEWA MOBIL ==================
     @GET("cek_ketersediaan.php")
@@ -59,6 +66,7 @@ public interface ServerAPI {
 
 
 
+
     @Multipart
     @POST("upload_bukti.php")
     Call<ResponseSewa> uploadBuktiTransfer(
@@ -72,9 +80,11 @@ public interface ServerAPI {
             @Field("kode_booking") String kodeBooking
     );
 
+    @GET("get_riwayat_sewa.php")
+    Call<SewaResponse> getRiwayatSewa(@Query("email") String email);
 
 
-// ================== PROFILE ==================
+    // ================== PROFILE ==================
     @FormUrlEncoded
     @POST("login_user.php")
     Call<ResponseBody> loginUser(

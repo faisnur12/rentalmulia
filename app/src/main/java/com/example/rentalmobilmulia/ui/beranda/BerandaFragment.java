@@ -22,10 +22,9 @@ import com.example.rentalmobilmulia.RetrofitClient;
 import com.example.rentalmobilmulia.ServerAPI;
 import com.example.rentalmobilmulia.databinding.FragmentBerandaBinding;
 import com.example.rentalmobilmulia.model.MobilModel;
-
 import com.example.rentalmobilmulia.ui.rentalmobil.DetailMobilFragment;
-import com.example.rentalmobilmulia.ui.rentalmobil.MobilAdapter;
-import com.example.rentalmobilmulia.ui.rentalmobil.MobilAdapterCallback;
+import com.example.rentalmobilmulia.ui.rentalmobil.SewaMobilFragment;
+import com.example.rentalmobilmulia.ui.beranda.ChatFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,7 @@ public class BerandaFragment extends Fragment {
 
     private FragmentBerandaBinding binding;
     private final List<MobilModel> rekomendasiMobilList = new ArrayList<>();
-    private MobilAdapter mobilAdapter;
+    private BerandaMobilAdapter mobilAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,11 +46,24 @@ public class BerandaFragment extends Fragment {
         setupSlider();
         setupKategori();
         setupRecyclerMobil();
-        showLocalUserData();     // Tampilkan dari SharedPreferences
-        loadRekomendasiMobil();  // Tampilkan daftar mobil
+        showLocalUserData();
+        setupLiveChatButton();
+        loadRekomendasiMobil();
 
         return binding.getRoot();
     }
+
+    private void setupLiveChatButton() {
+        binding.btnLiveChat.setOnClickListener(v -> {
+            ChatFragment chatFragment = new ChatFragment();
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.nav_host_fragment_activity_main, chatFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
+    }
+
 
     private void setupSlider() {
         List<SlideModel> slideModels = new ArrayList<>();
@@ -67,7 +79,6 @@ public class BerandaFragment extends Fragment {
         kategoriList.add(new CategoryBeranda(R.drawable.hyundai, "Hyundai", "16"));
         kategoriList.add(new CategoryBeranda(R.drawable.honda, "Honda", "37"));
 
-
         CategoryBerandaAdapter categoryAdapter = new CategoryBerandaAdapter(kategoriList, category -> {
             Intent intent = new Intent(getContext(), CategoryMobilActivity.class);
             intent.putExtra("kategori", category.getNama());
@@ -79,9 +90,9 @@ public class BerandaFragment extends Fragment {
     }
 
     private void setupRecyclerMobil() {
-        mobilAdapter = new MobilAdapter(getContext(), rekomendasiMobilList, new MobilAdapterCallback() {
+        mobilAdapter = new BerandaMobilAdapter(getContext(), rekomendasiMobilList, new BerandaMobilAdapter.OnMobilClickListener() {
             @Override
-            public void onClickDetail(MobilModel mobil) {
+            public void onDetailClick(MobilModel mobil) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("mobil", mobil);
 
@@ -96,38 +107,28 @@ public class BerandaFragment extends Fragment {
             }
 
             @Override
-            public void onClickSewa(MobilModel mobil) {
-                // Tidak dipakai di halaman Beranda
+            public void onSewaClick(MobilModel mobil) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("mobil", mobil);
+
+                SewaMobilFragment fragment = new SewaMobilFragment();
+                fragment.setArguments(bundle);
+
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment_activity_main, fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
-        binding.rvRekomendasiProduk.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        binding.rvRekomendasiProduk.setAdapter(mobilAdapter);
-    }
-
-    private void showLocalUserData() {
-        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("login_pref", Context.MODE_PRIVATE);
-        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
-        String nama = sharedPreferences.getString("nama", "Guest");
-        String profileImage = sharedPreferences.getString("profile_image", "");
-
-        binding.tvUsername.setText("Hai, " + (isLoggedIn ? nama : "Guest"));
-
-        if (!profileImage.isEmpty()) {
-            String imageUrl = RetrofitClient.BASE_URL_IMAGE + profileImage;
-            Glide.with(requireContext())
-                    .load(imageUrl)
-                    .placeholder(R.drawable.profile)
-                    .error(R.drawable.foto_profile)
-                    .into(binding.imgProfile);
-        } else {
-            binding.imgProfile.setImageResource(R.drawable.foto_profile);
-        }
+        binding.rvRekomendasiMobil.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        binding.rvRekomendasiMobil.setAdapter(mobilAdapter);
     }
 
     private void loadRekomendasiMobil() {
         ServerAPI api = RetrofitClient.getInstance();
-        Call<List<MobilModel>> call = api.getRekomendasiMobil();
+        Call<List<MobilModel>> call = api.getRekomendasiMobil(); // Sudah sorted LIMIT 3
 
         call.enqueue(new Callback<List<MobilModel>>() {
             @Override
@@ -148,16 +149,34 @@ public class BerandaFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    private void showLocalUserData() {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("login_pref", Context.MODE_PRIVATE);
+        String nama = sharedPreferences.getString("nama", "Guest");
+        String profileImage = sharedPreferences.getString("profile_image", "");
+
+        binding.tvUsername.setText("Hai, " + nama);
+
+        if (!profileImage.isEmpty()) {
+            String imageUrl = RetrofitClient.BASE_URL_IMAGE + profileImage;
+            Glide.with(requireContext())
+                    .load(imageUrl)
+                    .placeholder(R.drawable.profile)
+                    .error(R.drawable.foto_profile)
+                    .into(binding.imgProfile);
+        } else {
+            binding.imgProfile.setImageResource(R.drawable.foto_profile);
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        showLocalUserData();  // update dari SharedPreferences terbaru
+        showLocalUserData(); // refresh info user
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }

@@ -126,6 +126,7 @@ public class Login extends AppCompatActivity {
 
                         // Simpan ke SharedPreferences
                         editor.putBoolean("isLoggedIn", true);
+                        editor.putString("id_user", data.getString("id_user"));
                         editor.putString("nama", data.getString("nama_user")); // sesuaikan dengan key JSON dari PHP
                         editor.putString("email", data.getString("email"));
                         editor.putString("profile_image", data.optString("profile_image", ""));

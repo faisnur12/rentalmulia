@@ -31,7 +31,7 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
     private static final String BASE_URL_FOTO = BASE_URL + "uploads/";
 
     private int idMobil;
-    private String tanggalMulai, tanggalSelesai, metodePickup, driver;
+    private String tanggalMulai, tanggalSelesai, metodePickup, driver, fotoMobil;
     private double totalHarga;
 
     @Override
@@ -67,7 +67,7 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
             tanggalSelesai = extras.getString("tanggal_selesai", "");
             metodePickup = extras.getString("metode_pickup", "Ambil Sendiri");
             driver = extras.getString("driver", "Tidak");
-            String fotoMobil = extras.getString("foto_mobil", "");
+            fotoMobil = extras.getString("foto_mobil", "");
 
             int hariSewa = hitungHariSewa(tanggalMulai, tanggalSelesai);
             if (hariSewa <= 0) {
@@ -98,7 +98,7 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
 
             btnKonfirmasi.setOnClickListener(v -> konfirmasiSewa());
         } else {
-            Toast.makeText(this, "Data sewa tidak ditemukan!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Data tidak ditemukan", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
@@ -111,14 +111,6 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
             Toast.makeText(this, "Silakan login terlebih dahulu!", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        Log.d("DEBUG_SEWA", "email: " + email);
-        Log.d("DEBUG_SEWA", "idMobil: " + idMobil);
-        Log.d("DEBUG_SEWA", "tanggalMulai: " + tanggalMulai);
-        Log.d("DEBUG_SEWA", "tanggalSelesai: " + tanggalSelesai);
-        Log.d("DEBUG_SEWA", "metodePickup: " + metodePickup);
-        Log.d("DEBUG_SEWA", "driver: " + driver);
-        Log.d("DEBUG_SEWA", "totalHarga: " + totalHarga);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -141,21 +133,20 @@ public class KonfirmasiSewaActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<ResponseSewa> call, @NonNull Response<ResponseSewa> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    if (response.body().getSuccess() == 1) {
+                    ResponseSewa sewa = response.body();
+                    if (sewa.getSuccess() == 1) {
                         Toast.makeText(KonfirmasiSewaActivity.this, "Sewa berhasil dikonfirmasi!", Toast.LENGTH_SHORT).show();
 
-                        String kodeBooking = response.body().getKodeBooking();
-
                         Intent intent = new Intent(KonfirmasiSewaActivity.this, BuktiSewaActivity.class);
-                        intent.putExtra("kode_booking", kodeBooking);
+                        intent.putExtra("kode_booking", sewa.getKodeBooking());
                         intent.putExtra("total_harga", totalHarga);
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(KonfirmasiSewaActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(KonfirmasiSewaActivity.this, sewa.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(KonfirmasiSewaActivity.this, "Gagal menyimpan data sewa!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(KonfirmasiSewaActivity.this, "Gagal parsing data dari server", Toast.LENGTH_LONG).show();
                 }
             }
 

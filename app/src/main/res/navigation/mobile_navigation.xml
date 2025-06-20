@@ -30,7 +30,13 @@
         android:id="@+id/navigation_sewa_mobil"
         android:name="com.example.rentalmobilmulia.ui.rentalmobil.SewaMobilFragment"
         android:label="@string/title_sewamobil"
-        tools:layout="@layout/fragment_sewa_mobil" />
+        tools:layout="@layout/fragment_sewa_mobil">
+
+        <!-- Navigasi ke Pesanan setelah menyewa -->
+        <action
+            android:id="@+id/action_sewaMobilFragment_to_navigation_pesanan"
+            app:destination="@id/navigation_pesanan" />
+    </fragment>
 
     <!-- Pesanan -->
     <fragment
@@ -49,36 +55,48 @@
         <!-- Navigasi ke Login Guest -->
         <action
             android:id="@+id/action_navigation_profile_to_loginGuestFragment"
-            app:destination="@id/loginGuestFragment" />
+            app:destination="@id/login_guest_fragment" />
 
-        <!-- Navigasi ke Edit Profile -->
+        <!-- Navigasi ke Edit Profil -->
         <action
             android:id="@+id/action_navigation_profile_to_editProfileFragment"
-            app:destination="@id/editprofile" />
+            app:destination="@id/edit_profile_fragment" />
+
+        <!-- Navigasi ke Riwayat Sewa -->
+        <action
+            android:id="@+id/action_navigation_profile_to_riwayatSewaFragment"
+            app:destination="@id/riwayat_sewa_fragment" />
 
         <!-- Navigasi ke Kontak -->
         <action
             android:id="@+id/action_navigation_profile_to_contactFragment"
-            app:destination="@id/contacts" />
+            app:destination="@id/contact_fragment" />
     </fragment>
 
     <!-- Edit Profil -->
     <fragment
-        android:id="@+id/editprofile"
+        android:id="@+id/edit_profile_fragment"
         android:name="com.example.rentalmobilmulia.ui.profil.EditProfileFragment"
         android:label="Edit Profil"
         tools:layout="@layout/fragment_edit_profile" />
 
+    <!-- Riwayat Sewa -->
+    <fragment
+        android:id="@+id/riwayat_sewa_fragment"
+        android:name="com.example.rentalmobilmulia.ui.profil.RiwayatSewaFragment"
+        android:label="Riwayat Sewa"
+        tools:layout="@layout/fragment_riwayat_sewa" />
+
     <!-- Kontak Kami -->
     <fragment
-        android:id="@+id/contacts"
+        android:id="@+id/contact_fragment"
         android:name="com.example.rentalmobilmulia.ui.profil.ContactsFragment"
         android:label="Kontak Kami"
         tools:layout="@layout/fragment_contacts" />
 
     <!-- Login Guest -->
     <fragment
-        android:id="@+id/loginGuestFragment"
+        android:id="@+id/login_guest_fragment"
         android:name="com.example.rentalmobilmulia.ui.profil.LoginGuestFragment"
         android:label="Login Guest"
         tools:layout="@layout/fragment_login_guest" />

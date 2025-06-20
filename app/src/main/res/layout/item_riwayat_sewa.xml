@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bg_card_border">
+
+    <!-- Gambar Mobil -->
+    <ImageView
+        android:id="@+id/imgMobil"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/sample_mobil" />
+
+    <!-- Kode dan Nama Mobil -->
+    <TextView
+        android:id="@+id/tvKodeSewa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No. 1 | Kode: BK123"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/tvNamaMobil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nama Mobil: Avanza"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp" />
+
+    <!-- Tanggal Sewa -->
+    <TextView
+        android:id="@+id/tvTanggalSewa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tgl. Mulai: 01/07/2025 | Tgl. Selesai: 03/07/2025"
+        android:textSize="14sp" />
+
+    <!-- Durasi -->
+    <TextView
+        android:id="@+id/tvDurasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Durasi: 3 Hari"
+        android:textSize="14sp" />
+
+    <!-- Total Biaya -->
+    <TextView
+        android:id="@+id/tvTotalBiaya"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total: Rp750.000"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Status -->
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status: Belum Bayar"
+        android:textColor="@color/design_default_color_error"
+        android:textSize="14sp" />
+
+    <!-- Rekening Tujuan -->
+    <TextView
+        android:id="@+id/tvRekening"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Silakan transfer ke:\nBank BRI\nNo. Rek: 1234-5678-9101-1121\nA.N. Rental Mobil Mulia"
+        android:textSize="14sp"
+        android:textColor="#333333"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <!-- Gambar Bukti Pembayaran -->
+    <ImageView
+        android:id="@+id/imgBuktiBayar"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="center"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        android:src="@drawable/sample_bukti" />
+
+    <!-- Tombol Upload -->
+    <Button
+        android:id="@+id/btnUploadBukti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Bukti Pembayaran"
+        android:layout_marginTop="12dp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@android:color/white"
+        android:visibility="gone" />
+
+</LinearLayout>

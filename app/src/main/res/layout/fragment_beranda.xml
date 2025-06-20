@@ -57,12 +57,28 @@
                     android:textColor="@color/gray_dark" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/btnNotif"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:src="@drawable/ic_notifications"
-                android:background="?attr/selectableItemBackgroundBorderless" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/btnNotif"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Notifikasi"
+                    android:src="@drawable/ic_notifications" />
+
+                <ImageView
+                    android:id="@+id/btnLiveChat"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Live Chat"
+                    android:src="@drawable/ic_chat" />
+            </LinearLayout>
         </LinearLayout>
 
         <!-- Search -->
@@ -125,7 +141,7 @@
 
         <!-- Rekomendasi Mobil -->
         <TextView
-            android:id="@+id/tvRekomendasiProduk"
+            android:id="@+id/tvRekomendasiMobil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Rekomendasi Mobil"
@@ -136,7 +152,7 @@
             android:layout_marginTop="16dp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvRekomendasiProduk"
+            android:id="@+id/rvRekomendasiMobil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

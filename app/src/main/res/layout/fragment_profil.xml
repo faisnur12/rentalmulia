@@ -83,12 +83,42 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Edit Profil"
+                android:text="Lihat dan Edit Profil"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginStart="12dp" />
         </LinearLayout>
+
+        <!-- Tombol Riwayat Sewa -->
+        <LinearLayout
+            android:id="@+id/btnRiwayatSewa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/gray_light"
+            android:background="@drawable/bg_button_profile"
+            android:padding="12dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:src="@drawable/ic_history" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Riwayat Sewa"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginStart="12dp" />
+        </LinearLayout>
+
 
         <!-- Tombol Kontak Kami -->
         <LinearLayout
@@ -113,7 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="Kontak Kami"
+                android:text="Hubungi Kami"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />

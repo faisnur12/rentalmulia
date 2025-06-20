@@ -61,7 +61,7 @@ public class MobilModel implements Serializable {
     private String regDate;
 
     @SerializedName("status")
-    private String status;
+    private String status_mobil;
 
     @SerializedName("total_disewa")
     private int total_disewa;
@@ -149,7 +149,7 @@ public class MobilModel implements Serializable {
     }
 
     public String getStatus() {
-        return status;
+        return status_mobil;
     }
 
     public int getTotal_disewa() {
@@ -234,7 +234,7 @@ public class MobilModel implements Serializable {
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.status_mobil = status;
     }
 
     public void setTotal_disewa(int total_disewa) {
