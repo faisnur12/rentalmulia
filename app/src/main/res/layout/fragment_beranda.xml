@@ -131,7 +131,7 @@
                 android:id="@+id/tvCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kategori Mobil"
+                android:text="Kategori "
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="@color/black"
