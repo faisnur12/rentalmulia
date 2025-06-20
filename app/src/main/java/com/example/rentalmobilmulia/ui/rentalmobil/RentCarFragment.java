@@ -17,7 +17,6 @@ import com.example.rentalmobilmulia.RetrofitClient;
 import com.example.rentalmobilmulia.ServerAPI;
 import com.example.rentalmobilmulia.model.MobilModel;
 import com.example.rentalmobilmulia.model.MobilResponse;
-import com.example.rentalmobilmulia.model.ResponseDefault;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -53,17 +52,10 @@ public class RentCarFragment extends Fragment {
                 new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false)
         );
 
-        setupAdapter();
-        updateStatusMobilDariServer(); // refresh + update status
+        setupAdapter(); // pastikan adapter diset dulu
+        loadMobil();    // lalu ambil data
 
         return view;
-    }
-
-    // ✅ Ditambahkan agar saat balik ke fragment, status mobil otomatis update
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateStatusMobilDariServer();
     }
 
     private void setupAdapter() {
@@ -118,7 +110,7 @@ public class RentCarFragment extends Fragment {
                     fullMobilList.addAll(response.body().getMobil());
 
                     setupKategori(fullMobilList);
-                    filterMobil();
+                    filterMobil(); // update filteredList dan tampilkan
                 } else {
                     Toast.makeText(getContext(), "Gagal memuat data mobil", Toast.LENGTH_SHORT).show();
                 }
@@ -127,25 +119,6 @@ public class RentCarFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Call<MobilResponse> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), "Kesalahan jaringan: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    // ✅ Panggil update status dari server sebelum load data mobil
-    private void updateStatusMobilDariServer() {
-        ServerAPI api = RetrofitClient.getClient().create(ServerAPI.class);
-        Call<ResponseDefault> call = api.updateStatusMobil(); // Pastikan sudah ditambahkan di ServerAPI.java
-
-        call.enqueue(new Callback<ResponseDefault>() {
-            @Override
-            public void onResponse(@NonNull Call<ResponseDefault> call, @NonNull Response<ResponseDefault> response) {
-                loadMobil(); // tetap panggil load mobil walau response kosong
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<ResponseDefault> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Gagal update status mobil", Toast.LENGTH_SHORT).show();
-                loadMobil(); // tetap panggil agar data tampil
             }
         });
     }
@@ -181,6 +154,7 @@ public class RentCarFragment extends Fragment {
             }
         }
 
+        Log.d("FILTER_MOBIL", "Jumlah data ditampilkan: " + filteredList.size());
         mobilAdapter.notifyDataSetChanged();
     }
 }

@@ -24,7 +24,6 @@ import com.example.rentalmobilmulia.databinding.FragmentBerandaBinding;
 import com.example.rentalmobilmulia.model.MobilModel;
 import com.example.rentalmobilmulia.ui.rentalmobil.DetailMobilFragment;
 import com.example.rentalmobilmulia.ui.rentalmobil.SewaMobilFragment;
-import com.example.rentalmobilmulia.ui.beranda.ChatFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,23 +46,10 @@ public class BerandaFragment extends Fragment {
         setupKategori();
         setupRecyclerMobil();
         showLocalUserData();
-        setupLiveChatButton();
         loadRekomendasiMobil();
 
         return binding.getRoot();
     }
-
-    private void setupLiveChatButton() {
-        binding.btnLiveChat.setOnClickListener(v -> {
-            ChatFragment chatFragment = new ChatFragment();
-            requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.nav_host_fragment_activity_main, chatFragment)
-                    .addToBackStack(null)
-                    .commit();
-        });
-    }
-
 
     private void setupSlider() {
         List<SlideModel> slideModels = new ArrayList<>();
