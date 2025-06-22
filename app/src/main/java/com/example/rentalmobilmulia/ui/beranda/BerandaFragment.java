@@ -47,8 +47,19 @@ public class BerandaFragment extends Fragment {
         setupRecyclerMobil();
         showLocalUserData();
         loadRekomendasiMobil();
-
+        setupLiveChatButton();
         return binding.getRoot();
+    }
+
+    private void setupLiveChatButton() {
+        binding.btnLiveChat.setOnClickListener(v -> {
+            ChatFragment chatFragment = new ChatFragment();
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.nav_host_fragment_activity_main, chatFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
     }
 
     private void setupSlider() {

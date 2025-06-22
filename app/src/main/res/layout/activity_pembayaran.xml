@@ -53,11 +53,6 @@
                 android:layout_height="wrap_content"
                 android:text="E-Wallet" />
 
-            <RadioButton
-                android:id="@+id/rbCOD"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cash On Delivery" />
         </RadioGroup>
 
         <Button
